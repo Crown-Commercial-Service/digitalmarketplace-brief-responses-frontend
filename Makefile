@@ -19,3 +19,9 @@ bootstrap:
 	-@[ -z "$$TERM" ] || tput setaf 2  # green
 	@>&2 echo dmdevtools has been installed globally, run developer tasks with '`invoke`'
 	-@[ -z "$$TERM" ] || tput setaf 9  # default
+
+.PHONY: build
+build:
+	docker build -t digitalmarketplace-aws-brief-responses-frontend-http --build-arg DM_APP_NAME=brief-responses-frontend -f docker-aws/Dockerfile.http .
+	docker build -t digitalmarketplace-aws-brief-responses-frontend-wsgi -f docker-aws/Dockerfile.wsgi .
+
