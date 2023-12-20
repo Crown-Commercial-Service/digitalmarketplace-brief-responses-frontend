@@ -1,5 +1,7 @@
 # Base builds are defined in https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-aws-docker-base
 FROM digitalmarketplace/dmp-http-buildstatic:1.0.0 as buildstatic
+COPY --chown=uwsgi:uwsgi . ${APP_DIR}
+RUN ./scripts/build.sh
 
 FROM digitalmarketplace/dmp-wsgi:1.0.0
 COPY --from=buildstatic ${APP_DIR}/node_modules/digitalmarketplace-govuk-frontend ${APP_DIR}/node_modules/digitalmarketplace-govuk-frontend
